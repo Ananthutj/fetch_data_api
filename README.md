@@ -23,6 +23,6 @@ A Flutter app that displays a list of users by fetching data from a public API. 
 
 <img src="https://github.com/user-attachments/assets/39c04ca0-fce9-4135-a547-3eda4def5a0b" width="300" />
 
-<img src="https://github.com/user-attachments/assets/4aa19ae8-41cc-454d-9ff5-1917b95fadbd" width="300" />
+<img src="https://github.com/user-attachments/assets/0b468bf3-ba38-4bf5-8706-944fcbcbb7c8" width="300" />
 
 

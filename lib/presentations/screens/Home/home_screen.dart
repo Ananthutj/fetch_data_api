@@ -5,7 +5,9 @@ import 'package:api_fetch_appscrip/presentations/screens/Home/user_details.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+
 import '../../../data/models/user.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -17,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String _searchText = '';
   late TextEditingController _searchTextController = TextEditingController();
   List<User> _filteredUsers = [];
+  bool _isReversed = false;
 
   Future<void> _refreshUsers() async {
     context.read<UserDataBloc>().add(FetchUserDetails());
@@ -47,8 +50,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 user.email.toLowerCase().contains(_searchText.toLowerCase()))
             .toList();
       }
+      sortUsers(_isReversed);
     }
   }
+
+  void sortUsers(bool isReversed) {
+    final state = context.read<UserDataBloc>().state;
+    if (state is UserDataFetched) {
+      _filteredUsers = List<User>.from(state.users);
+      if (isReversed == true) {
+        _filteredUsers.sort((a, b) => b.name.compareTo(a.name));
+      } else {
+        _filteredUsers.sort((a, b) => a.name.compareTo(b.name));
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,40 +107,97 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Stack(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
                       children: [
-                        TextFormField(
-                          controller: _searchTextController,
-                          decoration: InputDecoration(
-                            hintText: 'Search Users',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
+                        Expanded(
+                          child: TextFormField(
+                            controller: _searchTextController,
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                                borderSide: BorderSide(
+                                  color: Colors.pink.shade300,
+                                  width: 2,
+                                ),
+                              ),
+                              suffixIcon: _searchTextController.text.isNotEmpty
+                                  ? IconButton(
+                                      icon: Icon(Icons.clear,
+                                          color: Colors.grey.shade600),
+                                      onPressed: () {
+                                        setState(() {
+                                          _searchText = '';
+                                          _searchTextController.clear();
+                                          _updateFilteredUsers();
+                                        });
+                                      },
+                                    )
+                                  : IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          _searchText = '';
+                                          _searchTextController.clear();
+                                        });
+                                      },
+                                      icon:
+                                          _searchTextController.text.isNotEmpty
+                                              ? const Icon(Icons.clear)
+                                              : const Icon(Icons.search),
+                                    ),
+                              hintText: 'Search Users',
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.blue)),
                             ),
+                            onChanged: (text) {
+                              setState(() {
+                                _searchText = text;
+                                _updateFilteredUsers();
+                              });
+                            },
+                            onTapOutside: (event) =>
+                                FocusScope.of(context).unfocus(),
                           ),
-                          onChanged: (text) {
+                        ),
+                        const Gap(10),
+                        GestureDetector(
+                          onTap: () {
                             setState(() {
-                              _searchText = text;
-                              _updateFilteredUsers();
+                              _isReversed = !_isReversed;
+                              sortUsers(_isReversed);
                             });
                           },
-                          onTapOutside: (event)=> FocusScope.of(context).unfocus(),
+                          child: Card(
+                              child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Column(children: [
+                              _isReversed == false
+                                  ? const Icon(
+                                      Icons.sort_outlined,
+                                      color: Colors.pink,
+                                      size: 26,
+                                    )
+                                  : Icon(
+                                      Icons.sort_outlined,
+                                      color: context.colorScheme.scrim,
+                                      size: 26,
+                                    ),
+                              _isReversed == false
+                                  ? Text(
+                                      "Sort by Z-A",
+                                      style: s11.copyWith(
+                                          color: Colors.grey.shade700),
+                                    )
+                                  : Text(
+                                      "Sort by A-Z",
+                                      style: s11.copyWith(
+                                          color: Colors.grey.shade700),
+                                    )
+                            ]),
+                          )),
                         ),
-                        Positioned(
-                            right: 0,
-                            child: Container(
-                                margin:
-                                    const EdgeInsets.only(top: 5, bottom: 5),
-                                child: IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      _searchText = '';
-                                      _searchTextController.clear();
-                                      
-                                    });
-                                  },
-                                  icon: _searchTextController.text.isNotEmpty ?const Icon(Icons.clear) : const Icon(Icons.search),
-                                )),)
                       ],
                     ),
                   ),

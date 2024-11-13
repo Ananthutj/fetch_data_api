@@ -1,4 +1,5 @@
 import 'package:api_fetch_appscrip/business_logic/bloc/user_data_bloc.dart';
+import 'package:api_fetch_appscrip/globals/extensions.dart';
 import 'package:api_fetch_appscrip/globals/text_styles.dart';
 import 'package:api_fetch_appscrip/presentations/screens/Home/user_details.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   Future<void> _refreshUsers() async {
     context.read<UserDataBloc>().add(FetchUserDetails());
   }
@@ -27,12 +27,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue.shade800,
+        backgroundColor: Colors.pink.shade600,
         title: Text(
           "Users",
-          style: s3.copyWith(color: Colors.white,fontSize: 25),
+          style: s3.copyWith(color: context.colorScheme.surface),
         ),
         centerTitle: true,
+        elevation: 5,
       ),
       body: BlocBuilder<UserDataBloc, UserDataState>(
         builder: (context, state) {
@@ -40,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return RefreshIndicator(
               onRefresh: _refreshUsers,
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(8.0),
                 child: ListView.builder(
                   itemCount: state.users.length,
                   itemBuilder: (context, index) {
@@ -52,15 +53,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => UserDetails(user: user)));
+                                  builder: (context) =>
+                                      UserDetails(user: user)));
                         },
                         child: Container(
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                Colors.teal.shade600,
-                                Colors.teal.shade800,
+                                Colors.deepPurple.shade600,
+                                Colors.pink.shade600,
                               ],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
@@ -68,25 +70,25 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.circular(15),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
+                                color: Colors.black.withOpacity(0.2),
                                 blurRadius: 10,
                                 spreadRadius: 2.5,
-                                offset:const Offset(0, 4),
+                                offset: const Offset(0, 4),
                               ),
                             ],
                           ),
                           child: ListTile(
                             title: Text(
                               user.name,
-                              style: h3.copyWith(color: Colors.white)
+                              style: h3.copyWith(color:context.colorScheme.surface),
                             ),
                             subtitle: Text(
                               user.email,
-                              style:h4.copyWith(color: Colors.white)
+                              style: h4.copyWith(color: context.colorScheme.surface),
                             ),
-                            trailing: const Icon(
+                            trailing: Icon(
                               Icons.arrow_forward_ios,
-                              color: Colors.white,
+                              color: context.colorScheme.surface,
                             ),
                           ),
                         ),
@@ -98,15 +100,24 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           } else if (state is UserDataLoading) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: Colors.deepPurple,
+              ),
             );
-          } else if(state is UserDataFailure){
+          } else if (state is UserDataFailure) {
             return const Center(
-              child: Text('No users found'),
+              child: Text(
+                'No users found',
+                style: TextStyle(color: Colors.red, fontSize: 18),
+              ),
             );
-          }
-          else{
-            return const Center(child: Text("Something went wrong"),);
+          } else {
+            return const Center(
+              child: Text(
+                "Something went wrong",
+                style: TextStyle(color: Colors.grey, fontSize: 18),
+              ),
+            );
           }
         },
       ),

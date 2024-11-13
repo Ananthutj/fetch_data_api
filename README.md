@@ -10,5 +10,5 @@ Pull-to-Refresh: Allows users to refresh the list by swiping down.
 Error Handling: Displays an error message if data cannot be fetched.
 Detail Screen: Shows more details about the user when a list item is tapped (Bonus feature).
 
-![main_screen](https://github.com/user-attachments/assets/7e0389b1-bd5d-4c33-b918-4d96e5c5890e)
-![second_screen](https://github.com/user-attachments/assets/72ec8820-df06-497b-b39d-fb0706ba069a)
+<img src="https://github.com/user-attachments/assets/7e0389b1-bd5d-4c33-b918-4d96e5c5890e" width="400" />
+<img src="https://github.com/user-attachments/assets/72ec8820-df06-497b-b39d-fb0706ba069a" width="400" />

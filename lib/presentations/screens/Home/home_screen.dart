@@ -50,7 +50,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 user.email.toLowerCase().contains(_searchText.toLowerCase()))
             .toList();
       }
-
       sortUsers(_isReversed);
     }
   }

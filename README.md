@@ -13,6 +13,6 @@ Search: Filters the list by user names (Bonus feature).
 Detail Screen: Shows more details about the user when a list item is tapped (Bonus feature).
 
 # Technical Stack
-Flutter (latest stable version)
-Bloc for state management
+Flutter (latest stable version),
+Bloc for state management,
 http for API requests

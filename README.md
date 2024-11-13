@@ -15,5 +15,5 @@ Detail Screen: Shows more details about the user when a list item is tapped (Bon
   Implemented a detail screen as a bonus feature, assuming users may want additional information.
 
 # Screenshots
-<img src="https://github.com/user-attachments/assets/7e0389b1-bd5d-4c33-b918-4d96e5c5890e" width="400" />
-<img src="https://github.com/user-attachments/assets/72ec8820-df06-497b-b39d-fb0706ba069a" width="400" />
+<img src="https://github.com/user-attachments/assets/7e0389b1-bd5d-4c33-b918-4d96e5c5890e" width="350" />
+<img src="https://github.com/user-attachments/assets/72ec8820-df06-497b-b39d-fb0706ba069a" width="350" />

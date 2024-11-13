@@ -10,6 +10,7 @@ A Flutter app that displays a list of users by fetching data from a public API. 
 - **Error Handling**: Displays an error message if data cannot be fetched.
 - **Detail Screen**: Shows more details about the user when a list item is tapped (Bonus feature).
 - **Search Functionality**: Search field for finding users by name or email (Bonus feature).
+- **Sorting of users**: Button for sorting the user list according to the name (Bonus feature).
 
 ## Decisions
 - Used BLoC for state management to handle API calls
@@ -18,8 +19,9 @@ A Flutter app that displays a list of users by fetching data from a public API. 
 - Assuming users may want additional information.
 
 ## Screenshots
-<img src="https://github.com/user-attachments/assets/8e42759b-7e55-4f65-ba62-a44a267afb83" width="300" />
+<img src="https://github.com/user-attachments/assets/cd3be499-693a-4742-bfff-92d5ad083d9d" width="300" />
 
 <img src="https://github.com/user-attachments/assets/bb061b30-e02d-46ae-8141-73614262c1aa" width="300" />
 
 <img src="https://github.com/user-attachments/assets/4aa19ae8-41cc-454d-9ff5-1917b95fadbd" width="300" />
+

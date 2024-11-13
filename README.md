@@ -16,6 +16,8 @@ A Flutter app that displays a list of users by fetching data from a public API. 
 - Implemented a detail screen as a bonus feature, assuming users may want additional information.
 
 ## Screenshots
-![Screenshot 1](https://github.com/user-attachments/assets/8e42759b-7e55-4f65-ba62-a44a267afb83)
-![Screenshot 2](https://github.com/user-attachments/assets/bb061b30-e02d-46ae-8141-73614262c1aa)
-![Screenshot 3](https://github.com/user-attachments/assets/4aa19ae8-41cc-454d-9ff5-1917b95fadbd)
+<img src="https://github.com/user-attachments/assets/8e42759b-7e55-4f65-ba62-a44a267afb83" width="300" />
+
+<img src="https://github.com/user-attachments/assets/bb061b30-e02d-46ae-8141-73614262c1aa" width="300" />
+
+<img src="https://github.com/user-attachments/assets/4aa19ae8-41cc-454d-9ff5-1917b95fadbd" width="300" />

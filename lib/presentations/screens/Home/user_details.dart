@@ -1,4 +1,5 @@
 import 'package:api_fetch_appscrip/data/models/user.dart';
+import 'package:api_fetch_appscrip/globals/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class UserDetails extends StatefulWidget {
@@ -15,7 +16,7 @@ class _UserDetailsState extends State<UserDetails> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.brown.shade400,
-        title: const Text("User Details", style: TextStyle(color: Colors.white)),
+        title: Text("User Details", style: s3.copyWith(color: Colors.white,fontSize: 25),),
         centerTitle: true,
         leading: IconButton(
             onPressed: () {
@@ -41,6 +42,7 @@ class _UserDetailsState extends State<UserDetails> {
             _buildUserInfo('Phone:', widget.user.phone, Icons.phone),
             _buildUserInfo('Username:', widget.user.userName, Icons.account_circle),
             _buildUserInfo('Website:', widget.user.website, Icons.language),
+
             _buildSectionTitle('Address'),
             _buildUserInfo('Street:', widget.user.street),
             _buildUserInfo('Suite:', widget.user.suite),

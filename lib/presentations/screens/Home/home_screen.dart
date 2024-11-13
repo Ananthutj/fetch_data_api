@@ -1,4 +1,5 @@
 import 'package:api_fetch_appscrip/business_logic/bloc/user_data_bloc.dart';
+import 'package:api_fetch_appscrip/globals/text_styles.dart';
 import 'package:api_fetch_appscrip/presentations/screens/Home/user_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,10 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue.shade800,
-        title: const Text(
+        title: Text(
           "Users",
-          style: TextStyle(
-              color: Colors.white, fontWeight: FontWeight.w800, fontSize: 25),
+          style: s3.copyWith(color: Colors.white,fontSize: 25),
         ),
         centerTitle: true,
       ),
@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.1),
                                 blurRadius: 10,
-                                spreadRadius: 2,
+                                spreadRadius: 2.5,
                                 offset:const Offset(0, 4),
                               ),
                             ],
@@ -78,18 +78,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: ListTile(
                             title: Text(
                               user.name,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
+                              style: h3.copyWith(color: Colors.white)
                             ),
                             subtitle: Text(
                               user.email,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                color: Colors.white70,
-                              ),
+                              style:h4.copyWith(color: Colors.white)
                             ),
                             trailing: const Icon(
                               Icons.arrow_forward_ios,

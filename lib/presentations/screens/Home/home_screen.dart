@@ -17,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String _searchText = '';
-  late TextEditingController _searchTextController = TextEditingController();
+  late TextEditingController _searchTextController;
   List<User> _filteredUsers = [];
   bool _isReversed = false;
 
@@ -34,12 +34,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    super.dispose();
     _searchTextController.dispose();
+    super.dispose();
   }
 
   void _updateFilteredUsers() {
-    final state = (BlocProvider.of<UserDataBloc>(context).state);
+    final state = context.read<UserDataBloc>().state;
     if (state is UserDataFetched) {
       if (_searchText.isEmpty) {
         _filteredUsers = state.users;
@@ -50,15 +50,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 user.email.toLowerCase().contains(_searchText.toLowerCase()))
             .toList();
       }
+
       sortUsers(_isReversed);
     }
   }
 
   void sortUsers(bool isReversed) {
-    final state = (BlocProvider.of<UserDataBloc>(context).state);
-    if (state is UserDataFetched) {
-      _filteredUsers = List<User>.from(state.users);
-      if (isReversed == true) {
+    if (_filteredUsers.isNotEmpty) {
+      if (isReversed) {
         _filteredUsers.sort((a, b) => b.name.compareTo(a.name));
       } else {
         _filteredUsers.sort((a, b) => a.name.compareTo(b.name));
@@ -78,10 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         elevation: 5,
         actions: [
-          Icon(
-            Icons.person,
-            color: context.colorScheme.surface,
-          ),
+          Icon(Icons.person, color: context.colorScheme.surface),
           const Gap(5),
           BlocBuilder<UserDataBloc, UserDataState>(
             builder: (context, state) {
@@ -140,10 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           _searchTextController.clear();
                                         });
                                       },
-                                      icon:
-                                          _searchTextController.text.isNotEmpty
-                                              ? const Icon(Icons.clear)
-                                              : const Icon(Icons.search),
+                                      icon: const Icon(Icons.search),
                                     ),
                               hintText: 'Search Users',
                               border: OutlineInputBorder(
@@ -170,33 +163,24 @@ class _HomeScreenState extends State<HomeScreen> {
                             });
                           },
                           child: Card(
-                              child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Column(children: [
-                              _isReversed == false
-                                  ? const Icon(
-                                      Icons.sort_outlined,
-                                      color: Colors.pink,
-                                      size: 26,
-                                    )
-                                  : Icon(
-                                      Icons.sort_outlined,
-                                      color: context.colorScheme.scrim,
-                                      size: 26,
-                                    ),
-                              _isReversed == false
-                                  ? Text(
-                                      "Sort by Z-A",
-                                      style: s11.copyWith(
-                                          color: Colors.grey.shade700),
-                                    )
-                                  : Text(
-                                      "Sort by A-Z",
-                                      style: s11.copyWith(
-                                          color: Colors.grey.shade700),
-                                    )
-                            ]),
-                          )),
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Column(children: [
+                                Icon(
+                                  Icons.sort_outlined,
+                                  color: _isReversed
+                                      ? context.colorScheme.scrim
+                                      : Colors.pink,
+                                  size: 26,
+                                ),
+                                Text(
+                                  _isReversed ? "Sort by A-Z" : "Sort by Z-A",
+                                  style:
+                                      s11.copyWith(color: Colors.grey.shade700),
+                                ),
+                              ]),
+                            ),
+                          ),
                         ),
                       ],
                     ),

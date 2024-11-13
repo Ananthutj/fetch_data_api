@@ -12,8 +12,10 @@ A Flutter app that displays a list of users by fetching data from a public API. 
 - **Search Functionality**: Search field for finding users by name or email (Bonus feature).
 
 ## Decisions
-- Used BLoC for state management to handle API calls, loading states, and error messages efficiently.
-- Implemented a detail screen as a bonus feature, assuming users may want additional information.
+- Used BLoC for state management to handle API calls
+- loading states, and error messages efficiently.
+- Implemented a detail screen as a bonus feature
+- Assuming users may want additional information.
 
 ## Screenshots
 <img src="https://github.com/user-attachments/assets/8e42759b-7e55-4f65-ba62-a44a267afb83" width="300" />

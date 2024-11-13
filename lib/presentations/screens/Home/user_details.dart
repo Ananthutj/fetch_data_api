@@ -71,7 +71,7 @@ class _UserDetailsState extends State<UserDetails> {
         child: Row(
           children: [
             if (icon != null)
-              Icon(icon, color: Colors.blueAccent.shade100, size: 20),
+              Icon(icon, color: Colors.pink.shade400, size: 20),
             const SizedBox(width: 12),
             Expanded(
               child: Text(

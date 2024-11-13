@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _updateFilteredUsers() {
-    final state = context.read<UserDataBloc>().state;
+    final state = (BlocProvider.of<UserDataBloc>(context).state);
     if (state is UserDataFetched) {
       if (_searchText.isEmpty) {
         _filteredUsers = state.users;
@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void sortUsers(bool isReversed) {
-    final state = context.read<UserDataBloc>().state;
+    final state = (BlocProvider.of<UserDataBloc>(context).state);
     if (state is UserDataFetched) {
       _filteredUsers = List<User>.from(state.users);
       if (isReversed == true) {

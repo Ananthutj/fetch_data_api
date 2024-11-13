@@ -16,4 +16,5 @@ Detail Screen: Shows more details about the user when a list item is tapped (Bon
 
 # Screenshots
 <img src="https://github.com/user-attachments/assets/a27d542f-159c-4690-b9fd-b6fad2a8bcb0" width="350" />
+
 <img src="https://github.com/user-attachments/assets/4aa19ae8-41cc-454d-9ff5-1917b95fadbd" width="350" />
